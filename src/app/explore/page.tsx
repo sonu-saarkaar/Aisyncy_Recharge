@@ -2,11 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export default function Explore() {
-  const router = useRouter();
-
   const menuItems = [
     {
       title: "Recharge Services",
@@ -71,79 +68,29 @@ export default function Explore() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#00802b] flex flex-col">
-      {/* Top Navigation */}
-      <nav className="px-8 py-4 flex items-center justify-between">
-        <button
-          onClick={() => router.push('/')}
-          className="bg-white text-black px-6 py-2 rounded-full text-base font-medium flex items-center hover:bg-opacity-90 transition-all"
-        >
-          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-          </svg>
-          Home
-        </button>
-
-        <div className="flex items-center">
-          <div className="text-white text-2xl font-semibold flex items-center">
-            <svg className="w-8 h-8 mr-2" viewBox="0 0 24 24" fill="white">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/>
-            </svg>
-            <span className="text-2xl">Aisyncy.recharge</span>
-          </div>
+    <div className="min-h-screen bg-[#00802b] p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-white mb-4">Explore Our Services</h1>
+          <p className="text-white/80 text-lg">Find everything you need for your recharge needs</p>
         </div>
-      </nav>
 
-      {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-4">
-        <div className="bg-[#00cc44] rounded-[30px] w-full max-w-3xl p-8">
-          <h2 className="text-2xl font-semibold text-white mb-6">Choose Your Recharge Method</h2>
-          
-          <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {menuItems.map((item, index) => (
             <Link
-              href="/"
-              className="block bg-white rounded-2xl p-6 hover:bg-opacity-90 transition-all"
+              key={index}
+              href={`/explore/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+              className="bg-[#00cc44] rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300"
             >
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">Website Recharge</h3>
-                  <p className="text-gray-600">Recharge through our website interface</p>
-                </div>
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                </svg>
+              <div className={`${item.color} w-16 h-16 rounded-full flex items-center justify-center mb-4`}>
+                {item.icon}
               </div>
+              <h2 className="text-2xl font-semibold text-white mb-2">{item.title}</h2>
+              <p className="text-white/80">{item.description}</p>
             </Link>
-
-            <Link
-              href="/whatsapp"
-              className="block bg-white rounded-2xl p-6 hover:bg-opacity-90 transition-all"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">WhatsApp Recharge</h3>
-                  <p className="text-gray-600">Recharge through WhatsApp chat</p>
-                </div>
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-            </Link>
-          </div>
+          ))}
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-[#00802b] w-full">
-        <div className="flex justify-between items-center text-sm text-white/70 px-8 py-2 border-t border-white/10">
-          <div>© 2024 Aisyncy.recharge. All rights reserved.</div>
-          <div className="flex space-x-4">
-            <Link href="/privacy-policy" className="hover:text-white transition-all">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-all">Terms & Conditions</Link>
-            <Link href="/recharge-policy" className="hover:text-white transition-all">Recharge Policy</Link>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 } 
